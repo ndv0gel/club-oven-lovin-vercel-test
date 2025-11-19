@@ -1,6 +1,6 @@
 'use client';
 
-import HeroSection from '@/components/HeroSection';
+import { HeroSection } from '@/components/marketing/HeroSection';
 import QuickStats from '@/components/QuickStats';
 
 export default function HomePage() {
@@ -11,13 +11,3 @@ export default function HomePage() {
     </>
   );
 }
-import { HeroSection } from '@/components/marketing/HeroSection';
-
-/** The Home page. */
-const Home = () => (
-  <main>
-    <HeroSection />
-  </main>
-);
-
-export default Home;

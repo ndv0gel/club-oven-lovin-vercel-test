@@ -78,19 +78,19 @@ const NavBar: React.FC = () => {
                 <Nav.Link href="/auth/signin" className="mx-2 nav-link-custom">
                   Sign In
                 </Nav.Link>
-                <Button
-                  as={Link}
-                  href="/auth/signup"
-                  style={{
-                    backgroundColor: '#ff6b35',
-                    borderColor: '#ff6b35',
-                    borderRadius: '20px',
-                    padding: '8px 24px',
-                    marginLeft: '10px'
-                  }}
-                >
-                  Sign Up
-                </Button>
+                <Link href="/auth/signup" legacyBehavior>
+                  <Button
+                    style={{
+                      backgroundColor: '#ff6b35',
+                      borderColor: '#ff6b35',
+                      borderRadius: '20px',
+                      padding: '8px 24px',
+                      marginLeft: '10px'
+                    }}
+                  >
+                    Sign Up
+                  </Button>
+                </Link>
               </>
             )}
           </Nav>
