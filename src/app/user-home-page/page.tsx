@@ -74,12 +74,24 @@ const UserHomePage = async () => {
               <h2 className="fw-bold mb-2">Stay in flow with one-tap tasks</h2>
               <p className="text-muted mb-0">Launch into your most common workflows from polished tiles.</p>
             </div>
+<<<<<<< HEAD
+=======
+            <Button href="/recipes/search" variant="outline-dark" className="mt-3 mt-md-0">
+              See all tools
+            </Button>
+>>>>>>> d453bf805bc92451529361af4515c81a18ed706b
           </div>
 
           <Row className="g-4">
             {actionButtons.map(({ label, href, description }) => (
               <Col key={label} xs={12} md={4}>
                 <div className="h-100 border rounded-4 p-4 shadow-sm">
+<<<<<<< HEAD
+=======
+                  <div className="d-inline-flex align-items-center justify-content-center rounded-3 bg-body-secondary text-dark mb-3" style={{ width: 48, height: 48 }}>
+                    <span className="fw-bold">{label.charAt(0)}</span>
+                  </div>
+>>>>>>> d453bf805bc92451529361af4515c81a18ed706b
                   <h3 className="h5 fw-semibold">{label}</h3>
                   <p className="text-muted mb-4">{description}</p>
                   <Button href={href} variant="dark" size="sm">
@@ -98,7 +110,11 @@ const UserHomePage = async () => {
             <p className="text-uppercase text-secondary mb-2">Recommended</p>
             <h2 className="fw-bold mb-3">Fresh ideas curated for you</h2>
             <p className="text-muted mb-0">
+<<<<<<< HEAD
               Based on your saved tags, pantry staples, and what the community can&apos;t stop cooking.
+=======
+              Based on your saved tags, pantry staples, and what the community cannot stop cooking.
+>>>>>>> d453bf805bc92451529361af4515c81a18ed706b
             </p>
           </div>
 
