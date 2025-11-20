@@ -14,7 +14,7 @@ body {
   flex-direction: column;
 }
 
-/* Make greeting card fully orange */
+/* Vendor */
 .vendor-homepage-greeting-card {
   color: #0b5e57 !important;           /* darker teal text */
 }
