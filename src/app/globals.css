@@ -21,6 +21,37 @@ body {
   flex-direction: column;
 }
 
+.signin-page {
+  min-height: 100vh;              
+  display: flex;
+  align-items: center;             
+  justify-content: center;         
+  background-color: #fff8f1;       
+}
+
+.change-password-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff8f1;  
+}
+
+.signout-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff8f1; 
+}
+
+.signup-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff8f1; 
+}
 /* Navbar Styles */
 .navbar {
   background-color: white !important;
