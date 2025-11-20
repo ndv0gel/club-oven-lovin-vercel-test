@@ -49,7 +49,7 @@ export default function Vendor({
     <Container className="py-4">
 
       {/* Greeting card */}
-      <Card className="mb-4 shadow-sm">
+      <Card className="greeting-card mb-4 shadow-sm">
         <Card.Body className="text-center">
           <Card.Title className="fs-2">
             Welcome, {vendor?.name || 'Vendor'}
@@ -62,7 +62,7 @@ export default function Vendor({
       </Card>
 
       {/* Ingredients table */}
-      <Table striped bordered hover responsive className="mb-4">
+      <Table bordered hover responsive className="vendor-table mb-4">
         <thead className="table-secondary">
           <tr>
             <th>Ingredient</th>
@@ -86,7 +86,8 @@ export default function Vendor({
                 )}
               </td>
               <td className="text-center">
-                <Button variant="outline-primary" size="sm">
+                <Button className="orange-btn"
+                 size="sm">
                   <PencilSquare />
                 </Button>
               </td>
@@ -142,7 +143,7 @@ export default function Vendor({
               </Form.Select>
             </Col>
             <Col md="auto">
-              <Button variant="dark" onClick={handleAddIngredient}>
+              <Button className="orange-btn" onClick={handleAddIngredient}>
                 <PlusCircle /> Add
               </Button>
             </Col>

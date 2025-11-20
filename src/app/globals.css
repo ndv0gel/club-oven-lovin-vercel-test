@@ -6,9 +6,36 @@ body {
   padding: 0;
   margin: 0;
 }
+
 .wrapper {
   box-sizing: border-box;
   min-height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+/* Make greeting card fully orange */
+.greeting-card {
+  color: #0b5e57 !important;           /* darker teal text */
+}
+
+.greeting-card .card-title,
+.greeting-card .card-text {
+  color: #0b5e57 !important; /* ensure text is dark teal */
+}
+
+/* Vendor table header text color */
+.vendor-table thead th {
+  background-color: #d6f5f0 !important; /* light mint */
+}
+
+.orange-btn {
+  background-color: #f97316 !important;
+  border-color: #f97316 !important;
+  color: white !important;
+}
+
+.orange-btn:hover {
+  background-color: #ea580c !important;
+  border-color: #ea580c !important;
 }
