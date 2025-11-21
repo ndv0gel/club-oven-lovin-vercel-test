@@ -8,22 +8,22 @@ const actionButtons = [
     label: 'Search Recipes',
     href: '/recipes/search',
     description: 'Dial in on cuisines, ingredients, and dietary filters instantly.',
-    accent: '#ff6b35',
-    accentSoft: '#ff9248',
+    accentStart: '#fff3ec',
+    accentEnd: '#ffd1b8',
   },
   {
     label: 'Add New Recipe',
     href: '/add',
     description: 'Document your latest win with smart fields and auto-tagging.',
-    accent: '#ff6b35',
-    accentSoft: '#ff9248',
+    accentStart: '#fff1ea',
+    accentEnd: '#ffc8a5',
   },
   {
     label: 'My Saved Recipes',
     href: '/recipes/saved',
     description: 'Jump back into your curated list whenever inspiration hits.',
-    accent: '#ff6b35',
-    accentSoft: '#ff9248',
+    accentStart: '#fff5ee',
+    accentEnd: '#ffd9c0',
   },
 ];
 
@@ -33,29 +33,38 @@ const recommendedRecipes = [
     description: 'Fresh basil, creamy mozzarella, and charred crust for an easy crowd-pleaser.',
     href: '/recipes/1',
     tag: 'Trending',
+    accentStart: '#fff3ec',
+    accentEnd: '#ffd1b8',
   },
   {
     title: 'Smoky Chipotle Tacos',
     description: 'Bright lime slaw and chipotle peppers bring serious flavor to weeknight tacos.',
     href: '/recipes/2',
     tag: '30 min',
+    accentStart: '#fff1ea',
+    accentEnd: '#ffc8a5',
   },
   {
     title: 'Creamy Garlic Pasta',
     description: 'Silky sauce in under 20 minutes when you crave comfort without the hassle.',
     href: '/recipes/3',
     tag: 'Comfort',
+    accentStart: '#fff5ee',
+    accentEnd: '#ffd9c0',
   },
   {
     title: 'Berry Oat Breakfast Bars',
     description: 'Sweet-tart berries baked into chewy, grab-and-go breakfast squares.',
     href: '/recipes/4',
     tag: 'Meal prep',
+    accentStart: '#fff0e7',
+    accentEnd: '#ffcba6',
   },
 ];
 
 const brandColor = '#ff6b35';
 const brandAccentColor = '#ff9248';
+const charcoal = '#2A2A2A';
 
 const UserHomePage = async () => {
   const session = (await getServerSession(authOptions)) as {
@@ -121,30 +130,33 @@ const UserHomePage = async () => {
         <Container>
           <div className="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4">
             <div>
-              <p className="text-uppercase text-secondary mb-2">Quick actions</p>
-              <h2 className="fw-bold mb-2">Stay in flow with one-tap tasks</h2>
-              <p className="text-muted mb-0">Launch into your most common workflows from polished tiles.</p>
+              <p className="text-uppercase mb-2" style={{ color: 'rgba(42, 42, 42, 0.7)', letterSpacing: 1 }}>
+                Quick actions
+              </p>
+              <h2 className="fw-bold mb-2" style={{ color: charcoal }}>
+                Stay in flow with one-tap tasks
+              </h2>
+              <p className="mb-0" style={{ color: 'rgba(42, 42, 42, 0.65)' }}>
+                Launch into your most common workflows from polished tiles.
+              </p>
             </div>
-            <Button href="/recipes/search" variant="outline-dark" className="mt-3 mt-md-0">
-              See all tools
-            </Button>
           </div>
 
           <Row className="g-4">
-            {actionButtons.map(({ label, href, description, accent, accentSoft }) => (
+            {actionButtons.map(({ label, href, description, accentStart, accentEnd }) => (
               <Col key={label} xs={12} md={4}>
                 <div
-                  className="h-100 rounded-4 p-4 text-white shadow-lg position-relative overflow-hidden"
+                  className="h-100 rounded-4 p-4 text-dark shadow-sm position-relative overflow-hidden border-0"
                   style={{
-                    background: `linear-gradient(90deg, ${accent} 0%, ${accentSoft} 50%, ${accent} 100%)`,
-                    boxShadow: '0 1.5rem 2.5rem rgba(255, 107, 53, 0.15)',
+                    background: `linear-gradient(135deg, ${accentStart}, ${accentEnd})`,
+                    boxShadow: '0 1.25rem 2.5rem rgba(255, 107, 53, 0.12)',
                   }}
                 >
-                  <span className="text-uppercase small fw-semibold" style={{ color: 'rgba(255,255,255,0.75)' }}>
+                  <span className="text-uppercase small fw-semibold" style={{ color: 'rgba(42,42,42,0.65)' }}>
                     Workflow
                   </span>
-                  <h3 className="h5 fw-semibold mt-2">{label}</h3>
-                  <p className="mb-4" style={{ color: 'rgba(255,255,255,0.85)' }}>
+                  <h3 className="h5 fw-semibold mt-2" style={{ color: charcoal }}>{label}</h3>
+                  <p className="mb-4" style={{ color: 'rgba(42,42,42,0.75)' }}>
                     {description}
                   </p>
                   <div className="d-flex align-items-center justify-content-between">
@@ -152,7 +164,7 @@ const UserHomePage = async () => {
                       href={href}
                       size="sm"
                       className="text-uppercase fw-semibold px-3"
-                      style={{ backgroundColor: '#fff', borderColor: '#fff', color: accent }}
+                      style={{ backgroundColor: charcoal, borderColor: charcoal, color: '#fff' }}
                     >
                       Launch
                     </Button>
@@ -161,8 +173,8 @@ const UserHomePage = async () => {
                       style={{
                         width: 48,
                         height: 48,
-                        backgroundColor: 'rgba(255,255,255,0.12)',
-                        color: '#fff',
+                        backgroundColor: 'rgba(42,42,42,0.08)',
+                        color: charcoal,
                       }}
                     >
                       {label.charAt(0)}
@@ -175,24 +187,45 @@ const UserHomePage = async () => {
         </Container>
       </section>
 
-      <section className="py-5 bg-body-tertiary">
+      <section className="py-5" style={{ background: 'linear-gradient(180deg, #fff5ef, #fff0e5 60%, #ffe4d1)' }}>
         <Container>
           <div className="text-center mb-5">
-            <p className="text-uppercase text-secondary mb-2">Recommended</p>
-            <h2 className="fw-bold mb-3">Fresh ideas curated for you</h2>
-            <p className="text-muted mb-0">
+            <p className="text-uppercase mb-2" style={{ color: 'rgba(42, 42, 42, 0.7)', letterSpacing: 1 }}>
+              Recommended
+            </p>
+            <h2 className="fw-bold mb-3" style={{ color: charcoal }}>Fresh ideas curated for you</h2>
+            <p className="mb-0" style={{ color: 'rgba(42, 42, 42, 0.65)' }}>
               Based on your saved tags, pantry staples, and what the community cannot stop cooking.
             </p>
           </div>
 
           <Row className="g-4">
-            {recommendedRecipes.map(({ title, description, href, tag }) => (
+            {recommendedRecipes.map(({ title, description, href, tag, accentStart, accentEnd }) => (
               <Col key={title} xs={12} md={6} lg={3}>
-                <div className="h-100 rounded-4 p-4 bg-white shadow-sm border">
-                  <span className="badge text-bg-dark mb-3">{tag}</span>
-                  <h3 className="h5 fw-semibold">{title}</h3>
-                  <p className="text-muted mb-4">{description}</p>
-                  <Button href={href} variant="outline-dark" size="sm">
+                <div
+                  className="h-100 rounded-4 p-4 text-dark shadow-sm border-0 position-relative overflow-hidden"
+                  style={{
+                    background: `linear-gradient(135deg, ${accentStart}, ${accentEnd})`,
+                    boxShadow: '0 1.25rem 2rem rgba(255, 107, 53, 0.1)',
+                  }}
+                >
+                  <span
+                    className="badge bg-white text-uppercase mb-3"
+                    style={{ letterSpacing: 0.5, color: charcoal, border: `1px solid ${charcoal}` }}
+                  >
+                    {tag}
+                  </span>
+                  <h3 className="h5 fw-semibold" style={{ color: charcoal }}>{title}</h3>
+                  <p className="mb-4" style={{ color: 'rgba(42, 42, 42, 0.7)' }}>
+                    {description}
+                  </p>
+                  <Button
+                    href={href}
+                    variant="light"
+                    size="sm"
+                    className="text-uppercase fw-semibold px-3"
+                    style={{ color: charcoal, borderColor: charcoal }}
+                  >
                     View recipe
                   </Button>
                 </div>
