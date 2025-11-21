@@ -8,16 +8,22 @@ const actionButtons = [
     label: 'Search Recipes',
     href: '/recipes/search',
     description: 'Dial in on cuisines, ingredients, and dietary filters instantly.',
+    accent: '#ff6b35',
+    accentSoft: '#ff9248',
   },
   {
     label: 'Add New Recipe',
     href: '/add',
     description: 'Document your latest win with smart fields and auto-tagging.',
+    accent: '#ff6b35',
+    accentSoft: '#ff9248',
   },
   {
     label: 'My Saved Recipes',
     href: '/recipes/saved',
     description: 'Jump back into your curated list whenever inspiration hits.',
+    accent: '#ff6b35',
+    accentSoft: '#ff9248',
   },
 ];
 
@@ -111,7 +117,7 @@ const UserHomePage = async () => {
         </Container>
       </section>
 
-      <section className="py-5 bg-white">
+      <section className="py-5" style={{ backgroundColor: '#fff7f3' }}>
         <Container>
           <div className="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4">
             <div>
@@ -125,17 +131,43 @@ const UserHomePage = async () => {
           </div>
 
           <Row className="g-4">
-            {actionButtons.map(({ label, href, description }) => (
+            {actionButtons.map(({ label, href, description, accent, accentSoft }) => (
               <Col key={label} xs={12} md={4}>
-                <div className="h-100 border rounded-4 p-4 shadow-sm">
-                  <div className="d-inline-flex align-items-center justify-content-center rounded-3 bg-body-secondary text-dark mb-3" style={{ width: 48, height: 48 }}>
-                    <span className="fw-bold">{label.charAt(0)}</span>
+                <div
+                  className="h-100 rounded-4 p-4 text-white shadow-lg position-relative overflow-hidden"
+                  style={{
+                    background: `linear-gradient(90deg, ${accent} 0%, ${accentSoft} 50%, ${accent} 100%)`,
+                    boxShadow: '0 1.5rem 2.5rem rgba(255, 107, 53, 0.15)',
+                  }}
+                >
+                  <span className="text-uppercase small fw-semibold" style={{ color: 'rgba(255,255,255,0.75)' }}>
+                    Workflow
+                  </span>
+                  <h3 className="h5 fw-semibold mt-2">{label}</h3>
+                  <p className="mb-4" style={{ color: 'rgba(255,255,255,0.85)' }}>
+                    {description}
+                  </p>
+                  <div className="d-flex align-items-center justify-content-between">
+                    <Button
+                      href={href}
+                      size="sm"
+                      className="text-uppercase fw-semibold px-3"
+                      style={{ backgroundColor: '#fff', borderColor: '#fff', color: accent }}
+                    >
+                      Launch
+                    </Button>
+                    <div
+                      className="rounded-circle d-inline-flex align-items-center justify-content-center fw-bold"
+                      style={{
+                        width: 48,
+                        height: 48,
+                        backgroundColor: 'rgba(255,255,255,0.12)',
+                        color: '#fff',
+                      }}
+                    >
+                      {label.charAt(0)}
+                    </div>
                   </div>
-                  <h3 className="h5 fw-semibold">{label}</h3>
-                  <p className="text-muted mb-4">{description}</p>
-                  <Button href={href} variant="dark" size="sm">
-                    Open
-                  </Button>
                 </div>
               </Col>
             ))}
