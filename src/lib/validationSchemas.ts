@@ -14,3 +14,14 @@ export const EditStuffSchema = Yup.object({
   condition: Yup.string().oneOf(['excellent', 'good', 'fair', 'poor']).required(),
   owner: Yup.string().required(),
 });
+
+export const EditProfileSchema = Yup.object({
+  id: Yup.string().required(),
+  name: Yup.string().required(),
+  email: Yup.string().email().required(),
+  image: Yup.string().default(""),
+  dietaryRestrictions: Yup
+    .array()
+    .of(Yup.string().required()) // ← prevents undefined inside array
+    .default([]),
+});
