@@ -38,4 +38,13 @@ export const EditRecipeSchema = Yup.object({
   tags: Yup.string().required(), 
   dietaryRestrictions: Yup.array().of(Yup.string()),
   owner: Yup.string().required(),
+export const EditProfileSchema = Yup.object({
+  id: Yup.string().required(),
+  name: Yup.string().required(),
+  email: Yup.string().email().required(),
+  image: Yup.string().default(""),
+  dietaryRestrictions: Yup
+    .array()
+    .of(Yup.string().required()) // ← prevents undefined inside array
+    .default([]),
 });

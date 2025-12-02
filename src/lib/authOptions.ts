@@ -21,27 +21,40 @@ const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials.password) {
-          return null;
-        }
-        const user = await prisma.user.findUnique({
-          where: {
-            email: credentials.email,
-          },
-        });
-        if (!user) {
+          console.error('[AUTH] Missing email or password');
           return null;
         }
 
-        const isPasswordValid = await compare(credentials.password, user.password);
-        if (!isPasswordValid) {
+        try {
+          console.log('[AUTH] Looking up user:', credentials.email);
+          const user = await prisma.user.findUnique({
+            where: {
+              email: credentials.email,
+            },
+          });
+
+          if (!user) {
+            console.error('[AUTH] User not found:', credentials.email);
+            return null;
+          }
+
+          console.log('[AUTH] User found, checking password...');
+          const isPasswordValid = await compare(credentials.password, user.password);
+          if (!isPasswordValid) {
+            console.error('[AUTH] Invalid password for user:', credentials.email);
+            return null;
+          }
+
+          console.log('[AUTH] Password valid, login successful');
+          return {
+            id: `${user.id}`,
+            email: user.email,
+            randomKey: user.role,
+          };
+        } catch (error) {
+          console.error('[AUTH] Error during authorization:', error);
           return null;
         }
-
-        return {
-          id: `${user.id}`,
-          email: user.email,
-          randomKey: user.role,
-        };
       },
     }),
   ],

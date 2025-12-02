@@ -78,6 +78,27 @@ export async function editStuff(stuff: Stuff) {
 }
 
 /**
+ * Edits user profile in the database.
+ */
+export async function updateUserProfile(data: {
+  id: string;
+  name: string;
+  email: string;
+  image: string;
+  dietaryRestrictions: string[];
+}) {
+  return prisma.user.update({
+    where: { id: Number(data.id) },
+    data: {
+      name: data.name,
+      email: data.email,
+      image: data.image,
+      dietaryRestrictions: data.dietaryRestrictions,
+    },
+  });
+}
+
+/**
  * Deletes an existing stuff from the database.
  * @param id, the id of the stuff to delete.
  */
