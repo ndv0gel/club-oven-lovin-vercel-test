@@ -55,7 +55,7 @@ export async function addRecipe(recipe: {
     },
   });
 
-  redirect("/recipes");
+  redirect("/browse-recipes");
 }
 
 /**

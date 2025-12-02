@@ -41,7 +41,7 @@ const NavBar: React.FC = () => {
             <Nav.Link href="/user-home-page" className="mx-2 nav-link-white-orange-hover" style={{ color: whiteColor }}> {/* White text with inline style */}
               Home
             </Nav.Link>
-            <Nav.Link href="/browse-recipie" className="mx-2 nav-link-white-orange-hover" style={{ color: whiteColor }}>
+            <Nav.Link href="/browse-recipes" className="mx-2 nav-link-white-orange-hover" style={{ color: whiteColor }}>
               Recipes
             </Nav.Link>
             <Nav.Link href="/vendors" className="mx-2 nav-link-white-orange-hover" style={{ color: whiteColor }}>

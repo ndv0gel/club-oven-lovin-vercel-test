@@ -1,14 +1,13 @@
-'use client';
+"use client";
 
-import { useSession } from 'next-auth/react';
-import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import swal from 'sweetalert';
-import { redirect } from 'next/navigation';
-import { addRecipe } from '@/lib/dbActions';
-import LoadingSpinner from '@/components/LoadingSpinner';
-import { AddRecipeSchema } from '@/lib/validationSchemas';
+import { useSession } from "next-auth/react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { AddRecipeSchema } from "@/lib/validationSchemas";
+import { addRecipe } from "@/lib/dbActions";
+import { useRouter } from "next/navigation";
+import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import LoadingSpinner from "./LoadingSpinner";
 
 type AddRecipeFormData = {
   name: string;
@@ -16,157 +15,111 @@ type AddRecipeFormData = {
   ingredients: string;
   steps: string;
   tags: string;
-  owner: string;
   dietaryRestrictions: string[];
+  owner: string;
 };
 
 export default function AddRecipeForm() {
   const { data: session, status } = useSession();
-  const currentUser = session?.user?.email || '';
+  const router = useRouter();
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<AddRecipeFormData>({
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<AddRecipeFormData>({
     resolver: yupResolver(AddRecipeSchema),
     defaultValues: {
-      name: '',
-      image: '',
-      ingredients: '',
-      steps: '',
-      tags: '',
+      name: "",
+      image: "",
+      ingredients: "",
+      steps: "",
+      tags: "",
       dietaryRestrictions: [],
-      owner: currentUser,
+      owner: session?.user?.email ?? "",
     },
   });
 
-  const onSubmit: SubmitHandler<AddRecipeFormData> = async (data) => {
-    const payload = {
-      ...data,
-      dietaryRestrictions: data.dietaryRestrictions ?? [],
-      tags: data.tags ?? '',
-      owner: data.owner ?? currentUser,
-    };
+  const owner = session?.user?.email ?? "";
 
-    await addRecipe(payload);
+  if (status === "loading") return <LoadingSpinner />;
+  if (status === "unauthenticated") {
+    router.push("/auth/signin");
+    return null;
+  }
 
-    swal('Success', 'Your recipe has been added!', 'success', {
-      timer: 2000,
-    });
+  // Form submit handler
+  const onSubmit = async (data: AddRecipeFormData) => {
+    await addRecipe({ ...data, owner }); // server action will redirect
   };
 
-  if (status === 'loading') return <LoadingSpinner />;
-  if (status === 'unauthenticated') redirect('/auth/signin');
-
   return (
-    <Container className="py-3">
-      <Row className="justify-content-center">
-        <Col xs={10}>
-          <h2 className="text-center mt-4 mb-2 display-5">
-            Create Your Culinary Masterpiece
-          </h2>
+    <Container className="py-4">
+      <h2 className="text-center mt-4 mb-2 display-5">
+        Create Your Culinary Masterpiece
+      </h2>
+      <p className="text-center mb-4" style={{ fontSize: "1.1rem", color: "#555" }}>
+        Tell us how you make your dish, including the ingredients, steps, and tips.
+      </p>
 
-          <p className="text-center mb-4" style={{ fontSize: "1.1rem", color: "#555" }}>
-            Tell us how you make your dish, including the ingredients, steps, and tips. Your recipe could be someone’s new favorite meal!
-          </p>
+      <Row className="justify-content-center">
+        <Col md={10}>
           <Card>
             <Card.Body>
               <Form onSubmit={handleSubmit(onSubmit)}>
-                
                 {/* NAME + IMAGE */}
                 <Row>
                   <Col>
                     <Form.Group>
                       <Form.Label>Recipe Name</Form.Label>
-                      <input
-                        type="text"
-                        {...register('name')}
-                        className={`form-control ${errors.name ? 'is-invalid' : ''}`}
-                      />
-                      <div className="invalid-feedback">{errors.name?.message}</div>
+                      <Form.Control type="text" {...register("name")} isInvalid={!!errors.name} />
+                      <Form.Control.Feedback type="invalid">{errors.name?.message}</Form.Control.Feedback>
                     </Form.Group>
                   </Col>
                   <Col>
                     <Form.Group>
                       <Form.Label>Picture URL</Form.Label>
-                      <input
-                        type="text"
-                        {...register('image')}
-                        className={`form-control ${errors.image ? 'is-invalid' : ''}`}
-                      />
-                      <div className="invalid-feedback">{errors.image?.message}</div>
+                      <Form.Control type="text" {...register("image")} isInvalid={!!errors.image} />
+                      <Form.Control.Feedback type="invalid">{errors.image?.message}</Form.Control.Feedback>
                     </Form.Group>
                   </Col>
                 </Row>
 
                 {/* INGREDIENTS */}
-                <Form.Group>
+                <Form.Group className="mt-3">
                   <Form.Label>Ingredients</Form.Label>
-                  <textarea
-                    {...register('ingredients')}
-                    className={`form-control ${errors.ingredients ? 'is-invalid' : ''}`}
-                  />
-                  <div className="invalid-feedback">{errors.ingredients?.message}</div>
+                  <Form.Control as="textarea" rows={4} {...register("ingredients")} isInvalid={!!errors.ingredients} />
+                  <Form.Control.Feedback type="invalid">{errors.ingredients?.message}</Form.Control.Feedback>
                 </Form.Group>
 
                 {/* STEPS */}
-                <Form.Group>
+                <Form.Group className="mt-3">
                   <Form.Label>Steps</Form.Label>
-                  <textarea
-                    {...register('steps')}
-                    className={`form-control ${errors.steps ? 'is-invalid' : ''}`}
-                  />
-                  <div className="invalid-feedback">{errors.steps?.message}</div>
+                  <Form.Control as="textarea" rows={5} {...register("steps")} isInvalid={!!errors.steps} />
+                  <Form.Control.Feedback type="invalid">{errors.steps?.message}</Form.Control.Feedback>
                 </Form.Group>
 
                 {/* TAGS */}
-                <Form.Group>
+                <Form.Group className="mt-3">
                   <Form.Label>Tags (comma separated)</Form.Label>
-                  <input
-                    type="text"
-                    {...register('tags')}
-                    className={`form-control ${errors.tags ? 'is-invalid' : ''}`}
-                  />
-                  <div className="invalid-feedback">{errors.tags?.message}</div>
+                  <Form.Control type="text" {...register("tags")} isInvalid={!!errors.tags} />
+                  <Form.Control.Feedback type="invalid">{errors.tags?.message}</Form.Control.Feedback>
                 </Form.Group>
 
                 {/* DIETARY RESTRICTIONS */}
-                <Form.Group>
+                <Form.Group className="mt-3">
                   <Form.Label>Dietary Restrictions</Form.Label>
-                  <div className="ms-2">
-                    {['vegan', 'vegetarian', 'gluten-free', 'dairy-free', 'nut-free'].map(label => (
-                      <div key={label} className="form-check">
-                        <input
-                          value={label}
-                          type="checkbox"
-                          {...register('dietaryRestrictions')}
-                          className="form-check-input"
-                        />
-                        <label className="form-check-label">{label}</label>
-                      </div>
-                    ))}
-                  </div>
+                  {["vegan", "vegetarian", "gluten-free", "dairy-free", "nut-free"].map((d) => (
+                    <Form.Check key={d} type="checkbox" value={d} label={d} {...register("dietaryRestrictions")} className="ms-2" />
+                  ))}
                 </Form.Group>
 
-                {/* OWNER (hidden) */}
-                <input type="hidden" {...register('owner')} value={currentUser} />
+                {/* hidden owner */}
+                <input type="hidden" value={owner} {...register("owner")} />
 
-                {/* ACTION BUTTONS */}
-                <Row className="pt-3">
+                {/* BUTTONS */}
+                <Row className="mt-4">
                   <Col>
-                    <Button type="submit" className="add-recipe-submit-btn" variant="primary">Submit</Button>
+                    <Button type="submit" variant="primary" className="add-recipe-submit-btn">Submit</Button>
                   </Col>
-                  <Col>
-                    <Button
-                      type="button"
-                      onClick={() => reset()}
-                      variant="warning"
-                      className="float-end add-recipe-reset-btn"
-                    >
-                      Reset
-                    </Button>
+                  <Col className="text-end">
+                    <Button variant="secondary" className="add-recipe-reset-btn" onClick={() => reset()}>Reset</Button>
                   </Col>
                 </Row>
 
