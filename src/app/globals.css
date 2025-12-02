@@ -116,6 +116,27 @@ body {
 
 /* AddRecipeForm */
 .add-recipe-submit-btn {
+  background-color: #f97316 !important;
+  border-color: #f97316 !important;
+  color: white !important;
+}
+
+.add-recipe-submit-btn:hover {
+  background-color: #ea580c !important;
+  border-color: #ea580c !important;
+}
+
+.add-recipe-reset-btn {
+  background-color: #3fc1b0 !important;
+  border-color: #3fc1b0 !important;
+  color: white !important;
+}
+
+.add-recipe-reset-btn:hover {
+  background-color: #0b5e57 !important;
+  color: white !important;
+}
+
 /* User Profile Edit Page */
 .edit-user-profile-save-btn {
   background-color: #f97316 !important;
@@ -131,11 +152,6 @@ body {
 .edit-user-profile-reset-btn {
   background-color: #3fc1b0 !important;
   border-color: #3fc1b0 !important;
-  color: white !important;
-}
-
-.add-recipe-reset-btn:hover {
-  background-color: #0b5e57 !important;
   color: white !important;
 }
 .edit-user-profile-reset-btn:hover {

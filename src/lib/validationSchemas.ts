@@ -14,10 +14,9 @@ export const AddRecipeSchema = Yup.object({
   steps: Yup.string().required(),
   tags: Yup.string().required(),
   dietaryRestrictions: Yup.array()
-    .of(Yup.string().required())  // every item must be a string
-    .default([])                  // default empty array so resolver always returns string[]
+    .of(Yup.string().required())
+    .default([])
     .required(),
-
   owner: Yup.string().required(),
 });
 
@@ -35,16 +34,15 @@ export const EditRecipeSchema = Yup.object({
   image: Yup.string().required(),
   ingredients: Yup.string().required(),
   steps: Yup.string().required(),
-  tags: Yup.string().required(), 
+  tags: Yup.string().required(),
   dietaryRestrictions: Yup.array().of(Yup.string()),
   owner: Yup.string().required(),
+});
+
 export const EditProfileSchema = Yup.object({
   id: Yup.string().required(),
   name: Yup.string().required(),
   email: Yup.string().email().required(),
-  image: Yup.string().default(""),
-  dietaryRestrictions: Yup
-    .array()
-    .of(Yup.string().required()) // ← prevents undefined inside array
-    .default([]),
+  image: Yup.string().default(''),
+  dietaryRestrictions: Yup.array().of(Yup.string().required()).default([]),
 });

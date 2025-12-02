@@ -10,7 +10,7 @@ export default async function AddRecipePage() {
   // Protect page (redirects or throws if user is not logged in)
   loggedInProtectedPage(
     session as {
-      user: { email: string; id: string };
+      user: { email: string; id: string; randomKey: string };
     } | null
   );
 

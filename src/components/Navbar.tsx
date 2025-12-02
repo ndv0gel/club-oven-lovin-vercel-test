@@ -49,7 +49,7 @@ const NavBar: React.FC = () => {
             </Nav.Link>
             
             {currentUser && (
-              <Nav.Link href="/add" className="mx-2 nav-link-white-orange-hover" style={{ color: whiteColor }}>
+              <Nav.Link href="/add-recipe" className="mx-2 nav-link-white-orange-hover" style={{ color: whiteColor }}>
                 Add Recipe
               </Nav.Link>
             )}
@@ -68,15 +68,19 @@ const NavBar: React.FC = () => {
                 title={<span style={{ color: whiteColor }}>{currentUser}</span>} // White text for dropdown title
                 className="mx-2 nav-dropdown-white-text"
               >
-                <NavDropdown.Item id="login-dropdown-sign-out" href="/api/auth/signout">
-                  <BoxArrowRight />
-                  {' '}
-                  Sign Out
+                <NavDropdown.Item id="login-dropdown-profile" href="/userprofile">
+                  User Profile
                 </NavDropdown.Item>
+                <NavDropdown.Divider />
                 <NavDropdown.Item id="login-dropdown-change-password" href="/auth/change-password">
                   <Lock />
                   {' '}
                   Change Password
+                </NavDropdown.Item>
+                <NavDropdown.Item id="login-dropdown-sign-out" href="/api/auth/signout">
+                  <BoxArrowRight />
+                  {' '}
+                  Sign Out
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (
