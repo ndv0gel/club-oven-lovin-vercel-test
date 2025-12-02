@@ -117,7 +117,7 @@ const UserHomePage = async () => {
                 <Button href="/recipes/search" variant="light" className="text-uppercase fw-semibold px-4">
                   Browse recipes
                 </Button>
-                <Button href="/add" variant="outline-light" className="text-uppercase fw-semibold px-4 text-white">
+                <Button href="/add-recipe" variant="outline-light" className="text-uppercase fw-semibold px-4 text-white">
                   Share a new dish
                 </Button>
               </div>
