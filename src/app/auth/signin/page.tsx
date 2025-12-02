@@ -54,7 +54,7 @@ const SignIn = () => {
                 <Form method="post" onSubmit={handleSubmit}>
                   <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email</Form.Label>
-                    <input name="email" type="text" className="form-control" placeholder="john@foo.com" />
+                    <input name="email" type="text" className="form-control" placeholder="example@foo.com" />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Password</Form.Label>
