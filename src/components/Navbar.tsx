@@ -49,7 +49,7 @@ const NavBar: React.FC = () => {
             </Nav.Link>
             
             {currentUser && (
-              <Nav.Link href="/add-recipe" className="mx-2 nav-link-white-orange-hover" style={{ color: whiteColor }}>
+              <Nav.Link href="/add" className="mx-2 nav-link-white-orange-hover" style={{ color: whiteColor }}>
                 Add Recipe
               </Nav.Link>
             )}
