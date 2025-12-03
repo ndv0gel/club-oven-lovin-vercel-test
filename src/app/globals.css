@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Define primary colors as CSS variables for consistency */
+:root {
+  --primary-orange: #ff6b35; /* Exact orange from Hero button */
+  --light-grey-hover: #e0e0e0; /* New light grey for hover effects */
+  --cream-color: #fff8f1; /* Chloe's cream color */
+  --white-color: white;
+  --darker-grey-text: #495057; /* General dark grey text */
+}
+
 html,
 body {
   --bs-light-rgb: 236, 236, 236;
@@ -12,6 +21,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+  background-color: var(--cream-color);
 }
 
 .wrapper {
@@ -21,80 +31,221 @@ body {
   flex-direction: column;
 }
 
-.signin-page {
-  min-height: 100vh;                       
-  background-color: #fff8f1;  
-  padding-top: 4rem;
-
-}
-
-.change-password-page {
-  min-height: 100vh;
-  background-color: #fff8f1;
-  padding-top: 4rem;
-}
-
-.signout-page {
-  min-height: 100vh;
-  background-color: #fff8f1; 
-  padding-top: 4rem;
-
-}
-
+.signin-page,
+.change-password-page,
+.signout-page,
 .signup-page {
-  min-height: 100vh;
-  background-color: #fff8f1; 
-  padding-top: 4rem;
-
+  min-height: 100vh;                      
+  background-color: var(--cream-color); /* Uses cream color */
+  padding-top: 4rem;     
 }
+
+/* Vendor Specific Styles */
+.vendor-homepage-greeting-card {
+  color: #0b5e57 !important;
+}
+
+.vendor-homepage-greeting-card .card-title,
+.vendor-homepage-greeting-card .card-text {
+  color: #0b5e57 !important;
+}
+
+.vendor-homepage-table thead th {
+  background-color: #d6f5f0 !important;
+}
+
+.vendor-homepage-orange-btn {
+  background-color: #f97316 !important;
+  border-color: #f97316 !important;
+  color: white !important;
+}
+
+.vendor-homepage-orange-btn:hover {
+  background-color: #ea580c !important;
+  border-color: #ea580c !important;
+}
+
+
+/* User Profile Specific Styles */
+.userprofile-card-accent {
+  background-color: #d6f5f0 !important;
+  color: #333 !important;
+}
+
+.userprofile-primary-accent {
+  background-color: #f97316 !important;
+  color: white !important;
+  border-color: #f97316 !important;
+}
+
+.userprofile-primary-accent:hover {
+  background-color: #ea580c !important; /* darker orange */
+  border-color: #ea580c !important;
+  color: white !important;
+}
+
+.userprofile-avatar {
+  background-color: #f97316 !important;
+  color: white !important;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.userprofile-badge {
+  background-color: #f97316 !important;
+  color: white !important;
+  font-size: 0.85rem;
+}
+
+.userprofile-section-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.userprofile-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.userprofile-card {
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+/* AddRecipeForm */
+.add-recipe-submit-btn {
+  background-color: #f97316 !important;
+  border-color: #f97316 !important;
+  color: white !important;
+}
+
+.add-recipe-submit-btn:hover {
+  background-color: #ea580c !important;
+  border-color: #ea580c !important;
+}
+
+.add-recipe-reset-btn {
+  background-color: #3fc1b0 !important;
+  border-color: #3fc1b0 !important;
+  color: white !important;
+}
+
+.add-recipe-reset-btn:hover {
+  background-color: #0b5e57 !important;
+  color: white !important;
+}
+
+/* User Profile Edit Page */
+.edit-user-profile-save-btn {
+  background-color: #f97316 !important;
+  border-color: #f97316 !important;
+  color: white !important;
+}
+
+.edit-user-profile-save-btn:hover {
+  background-color: #ea580c !important;
+  border-color: #ea580c !important;
+}
+
+.edit-user-profile-reset-btn {
+  background-color: #3fc1b0 !important;
+  border-color: #3fc1b0 !important;
+  color: white !important;
+}
+.edit-user-profile-reset-btn:hover {
+  background-color: #0b5e57 !important;
+  color: white !important;
+}
+
+/* --- YOUR NEW STYLES START HERE --- */
+
 /* Navbar Styles */
 .navbar {
-  background-color: white !important;
+  /* Background color is set inline in NavBar.tsx */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Keep a subtle shadow */
 }
 
-.nav-link-custom {
-  color: #6c757d !important;
+.nav-link-white-orange-hover { /* For nav links on orange background (navbar) */
+  color: var(--white-color) !important; /* Force white text */
   font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.nav-link-custom:hover {
-  color: #ff6b35 !important;
-}
-
-.nav-link {
-  color: #6c757d !important;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-  color: #ff6b35 !important;
-}
-
-/* Button Styles */
-.btn-primary {
   transition: all 0.3s ease;
 }
 
-.btn-primary:hover {
+.nav-link-white-orange-hover:hover {
+  color: var(--light-grey-hover) !important; /* Light grey on hover */
+  transform: translateY(-1px);
+}
+
+.nav-dropdown-white-text .dropdown-toggle {
+  color: var(--white-color) !important;
+}
+
+.nav-dropdown-white-text .dropdown-toggle:hover {
+  color: var(--light-grey-hover) !important; /* Light grey on hover */
+}
+
+/* Custom button styles for hover */
+.btn-signup-navbar { /* For the white "Sign Up" button in the navbar */
+  transition: all 0.3s ease;
+}
+
+.btn-signup-navbar:hover {
+  background-color: var(--light-grey-hover) !important; /* Light grey background on hover */
+  border-color: var(--light-grey-hover) !important;
+  color: var(--primary-orange) !important; /* Orange text on hover */
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
 }
 
-/* Card Hover Effects */
-.card {
+.btn-orange-hover { /* For "Sign In to Start Cooking" button in Hero */
   transition: all 0.3s ease;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+.btn-orange-hover:hover {
+  background-color: var(--light-grey-hover) !important; /* Light grey for hover */
+  border-color: var(--light-grey-hover) !important;
+  color: var(--darker-grey-text) !important; /* Darker text on grey hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
 }
 
-/* Hero Section */
-.hero-section {
-  background-color: #f8f9fa;
+.btn-outline-orange-hover { /* For "Browse Recipes" button in Hero */
+  transition: all 0.3s ease;
+}
+
+.btn-outline-orange-hover:hover {
+  background-color: var(--light-grey-hover) !important; /* Fill with light grey on hover */
+  color: var(--darker-grey-text) !important; /* Darker text on grey hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+/* Recipe Card Specific Styles */
+.recipe-card-custom {
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+  border-radius: 0.5rem; /* Slightly rounded corners */
+  overflow: hidden; /* Ensure image corners match card */
+}
+
+.recipe-card-custom:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15) !important; /* More pronounced shadow */
+}
+
+.recipe-card-image-container {
+  width: 100%;
+  height: 150px; /* Fixed height for image container */
+  position: relative;
+  overflow: hidden; /* Ensure image doesn't overflow */
+}
+
+.recipe-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cover the container, cropping if necessary */
 }
 
 /* Responsive adjustments */
