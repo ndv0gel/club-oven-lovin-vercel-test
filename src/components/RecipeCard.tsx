@@ -1,12 +1,14 @@
+// src/components/RecipeCard.tsx
+
 'use client';
 
 import Image from 'next/image';
 import { Card, Badge } from 'react-bootstrap';
 import { StarFill } from 'react-bootstrap-icons';
-import type { Recipe as DataRecipe } from '@/lib/recipeData';
-import type { Recipe as PrismaRecipe } from '@prisma/client';
+import type { Recipe } from '@/lib/recipeData'; // Now importing only the updated Recipe interface
 
-type RecipeType = DataRecipe | PrismaRecipe;
+// We no longer need the union type as we are consistently using Prisma data
+type RecipeType = Recipe;
 
 interface RecipeCardProps {
   recipe: RecipeType;
@@ -15,20 +17,23 @@ interface RecipeCardProps {
 const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
   const primaryOrange = '#ff6b35';
 
-  // Handle both mock data and database recipes
-  const rating = 'rating' in recipe ? recipe.rating : 5;
-  const time = 'time' in recipe ? recipe.time : 'N/A';
-  const price = 'price' in recipe ? recipe.price : 'USD 0.00';
-  const tags = 'tags' in recipe ? recipe.tags : [];
-  const dietaryRestrictions = 'dietaryRestrictions' in recipe ? recipe.dietaryRestrictions : [];
+  // These fields are now handled based on the Recipe interface from the database.
+  // 'rating' and 'time' are optional, so provide defaults if not present.
+  const rating = recipe.rating ?? 5; // Default to 5 stars if rating is not provided
+  const time = recipe.time ?? 'N/A'; // Default to 'N/A' if time is not provided
+  const tags = recipe.tags || []; // Ensure tags is an array, default to empty
+  const dietaryRestrictions = recipe.dietaryRestrictions || []; // Ensure dietaryRestrictions is an array, default to empty
+
+  // Provide a fallback image if recipe.image is empty or null
+  const imageUrl = recipe.image || '/images/placeholder-recipe.png'; // Use a placeholder if no image URL
 
   return (
     <Card className="h-100 shadow-sm border-0 recipe-card-custom">
       <div className="recipe-card-image-container">
         <Image
-          src={recipe.image}
+          src={imageUrl}
           alt={recipe.name}
-          width={150}
+          width={150} // Keep width and height for consistent card sizing
           height={150}
           className="card-img-top recipe-card-image"
           style={{ objectFit: 'cover' }}
@@ -42,6 +47,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
 
         {/* Rating / Time */}
         <div className="d-flex align-items-center mb-2">
+          {/* Display stars based on the rating (if available) */}
           {Array(rating)
             .fill(0)
             .map((_, i) => (
@@ -74,9 +80,14 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
           </div>
         )}
 
-        {/* Price */}
-        <Card.Text className="mt-auto fw-bold" style={{ color: primaryOrange }}>
+        {/* Removed Price display entirely */}
+        {/* <Card.Text className="mt-auto fw-bold" style={{ color: primaryOrange }}>
           {price}
+        </Card.Text> */}
+
+        {/* Display owner, useful for debugging or user-specific views */}
+        <Card.Text className="text-muted mt-auto" style={{ fontSize: '0.8em' }}>
+          By: {recipe.owner}
         </Card.Text>
       </Card.Body>
     </Card>
