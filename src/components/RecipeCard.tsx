@@ -3,24 +3,29 @@
 import Image from 'next/image';
 import { Card, Badge } from 'react-bootstrap';
 import { StarFill } from 'react-bootstrap-icons';
-import type { Recipe as DataRecipe } from '@/lib/recipeData';
+import type { Recipe as MarketingRecipe } from '@/lib/recipeData';
 import type { Recipe as PrismaRecipe } from '@prisma/client';
 
-type RecipeType = DataRecipe | PrismaRecipe;
+type RecipeCardRecipe = MarketingRecipe | PrismaRecipe;
 
 interface RecipeCardProps {
-  recipe: RecipeType;
+  recipe: RecipeCardRecipe;
 }
+
+const hasMarketingFields = (recipe: RecipeCardRecipe): recipe is MarketingRecipe =>
+  'rating' in recipe && 'time' in recipe && 'price' in recipe;
+
+const hasDietaryData = (recipe: RecipeCardRecipe): recipe is PrismaRecipe =>
+  'tags' in recipe && 'dietaryRestrictions' in recipe;
 
 const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
   const primaryOrange = '#ff6b35';
 
-  // Use recipe-provided values if present, otherwise fall back to defaults
-  const rating = (recipe as any).rating ?? 5;
-  const time = (recipe as any).time ?? 'N/A';
-  const price = (recipe as any).price ?? 'USD 0.00';
-  const tags: string[] = (recipe as any).tags ?? [];
-  const dietaryRestrictions: string[] = (recipe as any).dietaryRestrictions ?? [];
+  const rating = hasMarketingFields(recipe) ? recipe.rating : 5;
+  const time = hasMarketingFields(recipe) ? recipe.time : 'N/A';
+  const price = hasMarketingFields(recipe) ? recipe.price : 'USD 0.00';
+  const tags = hasDietaryData(recipe) ? recipe.tags : [];
+  const dietaryRestrictions = hasDietaryData(recipe) ? recipe.dietaryRestrictions : [];
 
   return (
     <Card
