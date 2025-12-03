@@ -15,19 +15,22 @@ interface RecipeCardProps {
 const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
   const primaryOrange = '#ff6b35';
 
-  // Handle both mock data and database recipes
-  const rating = 'rating' in recipe ? recipe.rating : 5;
-  const time = 'time' in recipe ? recipe.time : 'N/A';
-  const price = 'price' in recipe ? recipe.price : 'USD 0.00';
-  const tags = 'tags' in recipe ? recipe.tags : [];
-  const dietaryRestrictions = 'dietaryRestrictions' in recipe ? recipe.dietaryRestrictions : [];
+  // Use recipe-provided values if present, otherwise fall back to defaults
+  const rating = (recipe as any).rating ?? 5;
+  const time = (recipe as any).time ?? 'N/A';
+  const price = (recipe as any).price ?? 'USD 0.00';
+  const tags: string[] = (recipe as any).tags ?? [];
+  const dietaryRestrictions: string[] = (recipe as any).dietaryRestrictions ?? [];
 
   return (
-    <Card className="h-100 shadow-sm border-0 recipe-card-custom">
+    <Card
+      className="h-100 shadow-sm border-0 recipe-card-custom"
+      data-testid={`recipe-card-${recipe.id}`}
+    >
       <div className="recipe-card-image-container">
         <Image
-          src={recipe.image}
-          alt={recipe.name}
+          src={recipe.image || '/images/placeholder.png'}
+          alt={recipe.name || 'Recipe'}
           width={150}
           height={150}
           className="card-img-top recipe-card-image"
@@ -42,37 +45,31 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
 
         {/* Rating / Time */}
         <div className="d-flex align-items-center mb-2">
-          {Array(rating)
-            .fill(0)
-            .map((_, i) => (
-              <StarFill key={i} size={14} className="me-1" style={{ color: primaryOrange }} />
-            ))}
+          {Array.from({ length: rating }).map((_, i) => (
+            <StarFill key={i} size={14} className="me-1" style={{ color: primaryOrange }} />
+          ))}
           <span className="text-muted ms-auto" style={{ fontSize: '0.9em' }}>
             {time}
           </span>
         </div>
 
         {/* Tags */}
-        {tags.length > 0 && (
-          <div className="mb-1">
-            {tags.map((tag) => (
-              <Badge key={tag} bg="warning" className="me-1 text-dark">
-                {tag}
-              </Badge>
-            ))}
-          </div>
-        )}
+        <div className="mb-1">
+          {tags.map((tag) => (
+            <Badge key={tag} bg="warning" className="me-1 text-dark">
+              {tag}
+            </Badge>
+          ))}
+        </div>
 
         {/* Dietary Restrictions */}
-        {dietaryRestrictions.length > 0 && (
-          <div className="mb-2">
-            {dietaryRestrictions.map((d) => (
-              <Badge key={d} bg="success" className="me-1">
-                {d}
-              </Badge>
-            ))}
-          </div>
-        )}
+        <div className="mb-2">
+          {dietaryRestrictions.map((d) => (
+            <Badge key={d} bg="success" className="me-1">
+              {d}
+            </Badge>
+          ))}
+        </div>
 
         {/* Price */}
         <Card.Text className="mt-auto fw-bold" style={{ color: primaryOrange }}>

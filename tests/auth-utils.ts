@@ -3,9 +3,10 @@
 import { test as base, expect, Page } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
+import { PLAYWRIGHT_BASE_URL } from './test-helpers';
 
 // Base configuration
-const BASE_URL = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:3000';
+const BASE_URL = PLAYWRIGHT_BASE_URL;
 const SESSION_STORAGE_PATH = path.join(__dirname, 'playwright-auth-sessions');
 
 // Ensure session directory exists
