@@ -142,11 +142,22 @@ const UserHomePage = async () => {
                 Launch into your most common workflows from polished tiles.
               </p>
             </div>
+            <Button href="/recipes/search" variant="outline-dark" className="mt-3 mt-md-0">
+              See all tools
+            </Button>
           </div>
 
           <Row className="g-4">
             {actionButtons.map(({ label, href, description, accentStart, accentEnd }) => (
               <Col key={label} xs={12} md={4}>
+                  <div className="d-inline-flex align-items-center justify-content-center rounded-3 bg-body-secondary text-dark mb-3" style={{ width: 48, height: 48 }}>
+                    <span className="fw-bold">{label.charAt(0)}</span>
+                  </div>
+                  <h3 className="h5 fw-semibold">{label}</h3>
+                  <p className="text-muted mb-4">{description}</p>
+                  <Button href={href} variant="dark" size="sm">
+                    Open
+                  </Button>
                 <div
                   className="h-100 rounded-4 p-4 text-dark shadow-sm position-relative overflow-hidden border-0"
                   style={{

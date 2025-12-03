@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+.env
+node_modules/
+doc/user-home-page-page-explained.md
+=======
 # dependencies
 /node_modules
 /.pnp
@@ -36,3 +41,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+>>>>>>> d453bf805bc92451529361af4515c81a18ed706b

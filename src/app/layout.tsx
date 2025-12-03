@@ -22,11 +22,15 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} h-100 d-flex flex-column min-vh-100`}>
         <Providers>
+<<<<<<< HEAD
+          {children}
+=======
           <Navbar />
           <main className="flex-grow-1">
             {children}
           </main>
           <Footer />
+>>>>>>> d453bf805bc92451529361af4515c81a18ed706b
         </Providers>
       </body>
     </html>
