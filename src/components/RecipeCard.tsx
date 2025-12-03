@@ -20,7 +20,10 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
   const dietaryRestrictions: string[] = (recipe as any).dietaryRestrictions ?? [];
 
   return (
-    <Card className="h-100 shadow-sm border-0 recipe-card-custom">
+    <Card
+      className="h-100 shadow-sm border-0 recipe-card-custom"
+      data-testid={`recipe-card-${recipe.id}`}
+    >
       <div className="recipe-card-image-container">
         <Image
           src={recipe.image || '/images/placeholder.png'}
